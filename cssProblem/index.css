@@ -1,0 +1,25 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.div1, .div2{
+    min-height: 100px;
+}
+
+.div1{
+    background-color: red;
+    width: 300px;
+}
+
+.div2{
+    background-color: blue;
+    width: 500px;
+}
+
+.header1 nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+}

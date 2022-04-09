@@ -1,0 +1,50 @@
+<!-- @Description : Overriding element's css in Nebular/Angular
+@link : https://stackoverflow.com/questions/71804207/overriding-elements-css-in-nebular-angular
+@Issue:
+So I am trying to change the css of the header element of the nebular theme in angular
+
+It looks like so: https://i.stack.imgur.com/M4Ku4.png
+
+I want it to look like this: https://i.stack.imgur.com/tnIW6.png
+
+I am trying to separate the two elements (the "MyApp" and the actions bar). Through the console I found that I had to change the "justify-content" of the nav element embeded in the nb-header-layout to "space-between". Here is what I did
+
+html:
+<nb-layout-header class="header1">
+    <app-header></app-header>
+    <app-actions-bar></app-actions-bar>
+</nb-layout-header>
+
+css:
+
+.header1 nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+} -->
+<!--
+    @Update: 
+    1. This issue need more information to solve, he said this code css has correct order then that may not a css loading order issue.
+    2. Waiting
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header1">
+        <nav>
+            <div class="div1"></div>
+            <div class="div2"></div>
+        </nav>
+    </div>
+    
+</body>
+</html>
