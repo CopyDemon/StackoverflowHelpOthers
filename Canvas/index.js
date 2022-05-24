@@ -1,3 +1,5 @@
+//Video from
+//https://www.youtube.com/watch?v=vxljFhP2krI&list=PLpPnRKq7eNW3We9VdCfx9fprhqXHwTPXL&index=4
 //resize canvas
 const canvas = document.getElementById("canvasResizeCanvas")
 canvas.width = window.innerWidth
@@ -51,24 +53,44 @@ let c = canvas.getContext('2d')
 // let r = 30
 // let dx = (Math.random()-0.5 * 10)
 // let dy = (Math.random()-0.5 * 10)
+
+let mouse = {
+    x : undefined,
+    y : undefined
+}
+
+const maxR = 40
+const minR = 10
+
+let color = [
+    '#ffaa33',
+    '#99ffaaa',
+    '#00ff00',
+    '#4411aa',
+    '#ff1100'
+]
+
+window.addEventListener('mousemove', (event)=>{
+    mouse.x = event.x
+    mouse.y = event.y
+})
+
 function Circle(x, y, r, dx, dy){
     this.x = x
     this.y = y
     this.r = r
     this.dx = dx
     this.dy = dy
+    this.whichColor = color[Math.floor(Math.random() * color.length)]
 
     this.draw = function(){
         c.beginPath()
         c.arc(this.x, this.y, this.r , 0, Math.PI * 2, false)
-        c.strokeStyle = "blue"
-        //c.fillStyle = `rgba(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`
-        //c.fill()
-        c.stroke()
+        c.fillStyle = this.whichColor
+        c.fill()
     }
 
     this.update = function(){
-        //requestAnimationFrame(this.update)
         if(this.x + this.r > innerWidth || this.x - this.r < 0){
             this.dx = -this.dx
         }
@@ -79,18 +101,33 @@ function Circle(x, y, r, dx, dy){
         this.x += this.dx
         this.y += this.dy
 
+        //interactivity
+        if(
+               mouse.x - this.x < 50 
+            && mouse.x - this.x > -50
+            && mouse.y - this.y < 50
+            && mouse.y - this.y < -50
+        ){
+            console.log(`x`,this.x, mouse.x)
+            console.log(`y`,this.y, mouse.y)
+            if(this.r < maxR){
+                this.r += 1
+            }
+        }else if(this.r > minR){
+            this.r -= 1 
+        }
+
         this.draw()
     }
 }
 
-let circle = new Circle(200, 200, 50, 4, 8)
 let circleArr = []
-for(let i = 0; i < 100; i++){
+for(let i = 0; i < 1; i++){
     let r = Math.random() * 50
     let x = Math.random() * (innerWidth - r * 2) + r
     let y = Math.random() * (innerHeight - r * 2) + r
-    let dx = (Math.random()-0.5 * 10)
-    let dy = (Math.random()-0.5 * 10)
+    let dx = (Math.random() - 0.5)
+    let dy = (Math.random() - 0.5)
     circleArr.push(new Circle(x, y, r, dx, dy))
 }
 
